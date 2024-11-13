@@ -3,7 +3,7 @@
 
 <div class="arrow_div">
     <h1 class="arrow_div">
-    <svg class="arrow" viewBox="0 0 114 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="arrow1" class="arrow" viewBox="0 0 114 44" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_11_8)">
         <line x1="5.41798" y1="3.13214" x2="58.082" y2="33.5377" stroke="white" stroke-width="5"/>
         </g>
@@ -33,7 +33,7 @@
         </filter>
         </defs>
     </svg>    
-    <svg class="arrow" viewBox="0 0 114 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="arrow2" class="arrow" viewBox="0 0 114 44" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_11_8)">
         <line x1="5.41798" y1="3.13214" x2="58.082" y2="33.5377" stroke="white" stroke-width="5"/>
         </g>
@@ -63,7 +63,7 @@
         </filter>
         </defs>
     </svg> 
-    <svg class="arrow" viewBox="0 0 114 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="arrow3" class="arrow" viewBox="0 0 114 44" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#filter0_d_11_8)">
     <line x1="5.41798" y1="3.13214" x2="58.082" y2="33.5377" stroke="white" stroke-width="5"/>
     </g>
@@ -103,13 +103,64 @@
         flex-direction: column;
         padding: 0;
         margin: 0;
+        opacity: 0;
+        animation: fadeIn 0.5s ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 4.5s;
     }
 
     .arrow {
         scale: 0.5;
         width: 10vw;
         margin-top: 0vh;
+        filter: brightness(0);
         margin-bottom: -4.5vh;
         height: fit-content;
+    }
+
+    #arrow1 {
+        animation: lightUp 2s linear infinite;
+        animation-delay: 5s;
+        animation-fill-mode: forwards;
+    }
+
+    #arrow2 {
+        animation: lightUp 2s linear infinite;
+        animation-delay: 5.5s;
+        animation-fill-mode: forwards;
+    }
+
+    #arrow3 {
+        animation: lightUp 2s linear infinite;
+        animation-delay: 6s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes lightUp {
+        0% {
+            filter: brightness(0);
+        }
+
+        25% {
+            filter: brightness(1)
+        }
+
+        50% {
+            filter: brightness(0);
+        }
+
+        100% {
+            filter: brightness(0);
+        }
     }
 </style>
