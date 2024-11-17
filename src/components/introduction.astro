@@ -1,87 +1,105 @@
 ---
+
 ---
 
-<div class="flex row w100 h100">
-    <div class="flex column w50 h100">
-        <h5 class="pad1">
-            About Me
-        </h5>
-        <p class="pad1">
-            Hi there! you can call me Ojan or Fauzan.
-            I'm an enthusiastic 11th grade high school student with a deep passion for coding and technology. 
-            My journey in the world of programming began with Python, 
-            which remains my primary and favorite language due to its simplicity and versatility. 
-        </p>
-        <p class="pad1">
-            When I'm not immersed in code, I enjoy unwinding with video games.
-            They provide a perfect balance of entertainment, challenge and strategic thinking. 
-            Combining my love for programming and videogame, I often find myself exploring the intersection of technology and interactive entertainment.
-        </p>
+<div class="main_intro">
+  <div class="main_container">
+    <div class="half">
+      <p class="p">
+        Hi there! you can call me Ojan or Fauzan. I'm an enthusiastic 11th grade
+        high school student with a deep passion for coding and technology. My
+        journey in the world of programming began with Python, which remains my
+        primary and favorite language due to its simplicity and versatility.
+      </p>
+      <p class="p">
+        When I'm not immersed in code, I enjoy unwinding with video games. They
+        provide a perfect balance of entertainment, challenge and strategic
+        thinking. Combining my love for programming and videogame, I often find
+        myself exploring the intersection of technology and interactive
+        entertainment.
+      </p>
     </div>
-    <div class="flex column w50">
-        <div class="w100 h50">
-            <h1>Profile</h1>
+    <div class="half">
+      <div class="half-height scan_results">
+        <h4>SCAN RESULTS</h4>
+        <h2>FAUZAN RIZKY NAUFAL</h2>
+        <h4>AFFILIATION</h4>
+        <h2>-</h2>
+      </div>
+      <div class="half-height profile_scan">
+        <h1 class="profie_pic">IMG</h1>
+        <div class="profile_records">
+            <h2>Records</h2>
+            <p>-nethack</p>
+            <p>scefco.pages.dev</p>
+            <p>zenriel.tech</p>
         </div>
-        <div class="w100 h50">
-            <h1>Skills chart</h1>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <style>
-    html {
-        font-family: "Rajdhani";
-        font-size: 16px;
-    }
-    * {
-        color: white;
-        border: 1px solid white;
-        margin: 0;
-        padding: 0;
-    }
+  html {
+    font-family: "Rajdhani";
+    font-size: 16px;
+  }
+  * {
+    color: white;
+    border: 1px solid white;
+    margin: 0;
+    padding: 0;
+  }
 
-    h5 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        border: none;
-    }
+  h5 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: none;
+  }
 
-    p {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #d4d4d4;
-        border: none;
-    }
+  p {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #d4d4d4;
+    border: none;
+  }
 
-    .flex {
-        display: flex;
-    }
+  p::after {
+    content: "";
+    width: 100%;
+    background-color: white;
+    height: 100%;
+  }
 
-    .row {
-        flex-direction: row;
-    }
+  .main_intro {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    .column {
-        flex-direction: column;
-    }
+  .main_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+  }
 
-    .w100 {
-        width: 100%;
-    }
+  .half {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 1%;
+  }
 
-    .w50 {
-        width: 50%;
-    }
+  .half-height {
+    height: 50%;
+  }
 
-    .h100 {
-        height: 100%;
-    }
-
-    .h50 {
-        height: 50%;
-    }
-
-    .pad1 {
-        padding: 1%;
-    }
+  .profile_scan {
+    display: flex;
+    flex-direction: row;
+  }
 </style>
