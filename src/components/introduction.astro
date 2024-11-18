@@ -23,7 +23,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
         entertainment.
       </p>
     </div>
-    <div class="half">
+    <div class="profile half">
       <div class="half-height scan_results">
         <h4>SCAN RESULTS</h4>
         <h2>FAUZAN RIZKY NAUFAL</h2>
@@ -33,7 +33,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
       <div class="half-height profile_scan">
         <Image src={OjanHacker} class="profile_pic" alt="ojan's pic" />
         <div class="profile_records">
-            <h2>Records</h2>
+            <h2>Activity Records</h2>
             <a target="_blank" href="https://github.com/nvll-zen/-nethack">~> -nethack</a>
             <a target="_blank" href="https://scefco.pages.dev">~> scefco.pages.dev</a>
             <a target="_blank" href="https://zenriel.tech">~> zenriel.tech</a>
@@ -96,7 +96,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
 
   .main_intro {
     width: 100%;
-    height: 100%;
+    height: 150vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -123,6 +123,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
 
   .half {
     width: 40%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -145,14 +146,34 @@ import OjanHacker from '../images/OjanHacker.jpg'
     gap: 5%;
   }
 
+  .profile {
+    gap: 50px;
+  }
+
   .strip {
     font-weight: 900;
   }
 
   .profile_pic {
-    height: max-content;
-    width: 30%;
+    height: fit-content;
+    width: 25%;
     filter: grayscale(0);
+  }
+
+  @media only screen and (max-width: 720px) {
+    .main_container {
+      flex-direction: column;
+      height: fit-content;
+    }
+
+    .half {
+      width: 100%;
+      height: fit-content;
+    }
+
+    .half-height {
+      height: 25%;
+    }
   }
 
   @keyframes scrollFG {
