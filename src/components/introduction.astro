@@ -33,7 +33,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
       <div class="half-height profile_scan">
         <Image src={OjanHacker} class="profile_pic" alt="ojan's pic" />
         <div class="profile_records">
-            <h2>Activity Records</h2>
+            <h2>Projects</h2>
             <a target="_blank" href="https://github.com/nvll-zen/-nethack">~> -nethack</a>
             <a target="_blank" href="https://scefco.pages.dev">~> scefco.pages.dev</a>
             <a target="_blank" href="https://zenriel.tech">~> zenriel.tech</a>
@@ -96,7 +96,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
 
   .main_intro {
     width: 100%;
-    height: 150vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,6 +129,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
     gap: 10px;
     padding: 1%;
     border: 1px solid white;
+    background: black;
   }
 
   .half-height {
@@ -161,6 +162,9 @@ import OjanHacker from '../images/OjanHacker.jpg'
   }
 
   @media only screen and (max-width: 720px) {
+    .main_intro {
+      height: 150vh;
+    }
     .main_container {
       flex-direction: column;
       height: fit-content;
