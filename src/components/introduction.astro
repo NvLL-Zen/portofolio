@@ -1,8 +1,12 @@
 ---
-
+import Image from "astro/components/Image.astro"
+import OjanHacker from '../images/OjanHacker.jpg'
 ---
 
 <div class="main_intro">
+  <div class="data_title">
+    <h1 class="data">DATA</h1>
+  </div>
   <div class="main_container">
     <div class="half">
       <p class="p">
@@ -27,7 +31,7 @@
         <h2>-</h2>
       </div>
       <div class="half-height profile_scan">
-        <h1 class="profie_pic">IMG</h1>
+        <Image src={OjanHacker} class="profile_pic" alt="ojan's pic" />
         <div class="profile_records">
             <h2>Records</h2>
             <p>-nethack</p>
@@ -46,7 +50,7 @@
   }
   * {
     color: white;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     margin: 0;
     padding: 0;
   }
@@ -77,6 +81,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+  }
+
+  .data_title {
+    width: 86%;
+  }
+
+  .data {
+    padding: 0.5% 1%;
+    width: fit-content;
   }
 
   .main_container {
@@ -101,5 +115,12 @@
   .profile_scan {
     display: flex;
     flex-direction: row;
+    gap: 5%;
+  }
+
+  .profile_pic {
+    height: max-content;
+    width: 30%;
+    filter: grayscale(0);
   }
 </style>
