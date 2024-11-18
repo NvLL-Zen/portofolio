@@ -5,7 +5,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
 
 <div class="main_intro">
   <div class="data_title">
-    <h1 class="data">DATA</h1>
+    <h1 class="data">ABOUT ME</h1>
   </div>
   <div class="main_container">
     <div class="half">
@@ -28,15 +28,15 @@ import OjanHacker from '../images/OjanHacker.jpg'
         <h4>SCAN RESULTS</h4>
         <h2>FAUZAN RIZKY NAUFAL</h2>
         <h4>AFFILIATION</h4>
-        <h2>-</h2>
+        <h2 class="strip">-</h2>
       </div>
       <div class="half-height profile_scan">
         <Image src={OjanHacker} class="profile_pic" alt="ojan's pic" />
         <div class="profile_records">
             <h2>Records</h2>
-            <p>-nethack</p>
-            <p>scefco.pages.dev</p>
-            <p>zenriel.tech</p>
+            <a target="_blank" href="https://github.com/nvll-zen/-nethack">~> -nethack</a>
+            <a target="_blank" href="https://scefco.pages.dev">~> scefco.pages.dev</a>
+            <a target="_blank" href="https://zenriel.tech">~> zenriel.tech</a>
         </div>
       </div>
     </div>
@@ -48,9 +48,23 @@ import OjanHacker from '../images/OjanHacker.jpg'
     font-family: "Rajdhani";
     font-size: 16px;
   }
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.25rem;
+    transition: all 0.5s linear;
+  }
+
+  a:hover {
+    background: white;
+    color: black;
+    transition: all 0.5s linear;
+  }
+  
   * {
     color: white;
-    /* border: 1px solid white; */
+    /* border: 1px solid red; */
     margin: 0;
     padding: 0;
   }
@@ -75,6 +89,11 @@ import OjanHacker from '../images/OjanHacker.jpg'
     height: 100%;
   }
 
+  p, h2 {
+    animation: scrollFG 1s linear;
+    animation-timeline: view();
+  }
+
   .main_intro {
     width: 100%;
     height: 100%;
@@ -85,11 +104,13 @@ import OjanHacker from '../images/OjanHacker.jpg'
   }
 
   .data_title {
-    width: 86%;
+    width: 86.25%;
   }
 
   .data {
+    border: 1px solid white;
     padding: 0.5% 1%;
+    border-bottom: none;
     width: fit-content;
   }
 
@@ -97,19 +118,25 @@ import OjanHacker from '../images/OjanHacker.jpg'
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 25px;
+    gap: 2%;
   }
 
   .half {
     width: 40%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     padding: 1%;
+    border: 1px solid white;
   }
 
   .half-height {
     height: 50%;
+  }
+
+  .profile_records {
+    display: flex;
+    flex-direction: column;
   }
 
   .profile_scan {
@@ -118,9 +145,29 @@ import OjanHacker from '../images/OjanHacker.jpg'
     gap: 5%;
   }
 
+  .strip {
+    font-weight: 900;
+  }
+
   .profile_pic {
     height: max-content;
     width: 30%;
     filter: grayscale(0);
+  }
+
+  @keyframes scrollFG {
+    0% {
+      background: white;
+      color: white;
+    }
+
+    20% {
+      background: white;
+      color: white;
+    }
+
+    35% {
+      background: transparent;
+    }
   }
 </style>
