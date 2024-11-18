@@ -38,7 +38,7 @@ import Scrolldown from '../components/scrolldown.astro';
     svg path {
         fill: transparent;
         stroke: white;
-        stroke-width: 0.25;
+        stroke-width: 0.5;
         stroke-dasharray: 210;
         stroke-dashoffset: 0;
         animation: 5s svgAnim ease-in-out;
@@ -72,11 +72,12 @@ import Scrolldown from '../components/scrolldown.astro';
         }
 
         90% {
-            stroke: #fff;
+            stroke-width: 0.5;
+
         }
 
         100% {
-            stroke: #fff;
+            stroke-width: 0.25;
             stroke-dashoffset: 0;
             fill: #fff;
         }
