@@ -20,18 +20,38 @@
 		<style>
 			body {
 				scroll-behavior: smooth;
-				background: transparent;
+				background: black;
 				overflow-x: hidden;
 			}
 			* {
 				padding: 0;
 				margin: 0;
 			}
+
+			#background-video {
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: -1;
+	}
 			
 		</style>
 	</head>
 	<body>
-		
+		<video
+	id="background-video"
+	autoplay
+	loop
+	muted
+	poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTogPfhbLOk_neriTUlJLrzYaVQG1DszGsBLQ&s"
+>
+	<source src="src/images/lines_fix.mp4" type="video/mp4" />
+</video>
 		<slot />
 	</body>
 </html>
