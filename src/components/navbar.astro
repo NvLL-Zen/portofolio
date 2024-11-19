@@ -188,6 +188,7 @@
     background: transparent;
     border: none;
   }
+
   .mainNav {
     display: flex;
     position: fixed;
@@ -198,6 +199,12 @@
     background-color: transparent;
     padding-top: 0.5%;
     padding-left: 0.5%;
+  }
+
+  @media only screen and (max-width: 720px) {
+    .mainNav {
+      display: none;
+    }
   }
 
   .menu_button {
