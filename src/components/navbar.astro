@@ -3,69 +3,73 @@
 ---
 
 <script>
-  const menuRectangle = document.getElementById("menuRectangle")
-  const menuCircle = document.getElementById("menuInnerCircle")
+  const menuRectangle = document.getElementById("menuRectangle");
+  const menuCircle = document.getElementById("menuInnerCircle");
 
-  const homeButton = document.getElementById("homeButton")
-  const aboutButton = document.getElementById("aboutButton")
-  homeButton.style.transform = "translateX(-85%)"
-  aboutButton.style.transform = "translateX(-210%)"
+  const homeButton = document.getElementById("homeButton");
+  const aboutButton = document.getElementById("aboutButton");
+  homeButton.style.transform = "translateX(-85%)";
+  aboutButton.style.transform = "translateX(-210%)";
   let state = "closed";
 
+  const close = () => {
+    menuRectangle.style.transform = "rotateZ(0deg)";
+    menuRectangle.style.opacity = "1";
+
+    menuCircle.style.opacity = "0";
+
+    homeButton.style.transform = "translateX(-85%)";
+    homeButton.style.opacity = "0";
+    homeButton.style.zIndex = "-1";
+
+    aboutButton.style.transform = "translateX(-210%)";
+    aboutButton.style.opacity = "0";
+    aboutButton.style.zIndex = "-2";
+
+    state = "closed";
+  };
+
+  const open = () => {
+    menuRectangle.style.transform = "rotateZ(360deg)";
+    menuRectangle.style.opacity = "0";
+
+    menuCircle.style.opacity = "1";
+
+    homeButton.style.transform = "translateX(0)";
+    homeButton.style.opacity = "1";
+    homeButton.style.zIndex = "1";
+
+    aboutButton.style.transform = "translateX(0)";
+    aboutButton.style.opacity = "1";
+    aboutButton.style.zIndex = "1";
+
+    state = "open";
+  };
+
   homeButton.addEventListener("click", () => {
-    window.location.href = "#home_section"
-  })
-  
+    window.location.href = "#home_section";
+    close();
+  });
+
   aboutButton.addEventListener("click", () => {
-    window.location.href = "#about_section"
-  })
+    window.location.href = "#about_section";
+    close();
+  });
 
   const menu_button = document.getElementById("menu_button");
   menu_button.addEventListener("click", () => buttonToggle());
-  menuCircle.style.opacity = "0"
+  menuCircle.style.opacity = "0";
   function buttonToggle() {
-    if (state == "closed") {   
-      menuRectangle.style.transform = "rotateZ(360deg)"
-      menuRectangle.style.opacity = "0"
-
-      menuCircle.style.opacity = "1"
-
-      homeButton.style.transform = "translateX(0)"
-      homeButton.style.opacity = "1"
-      homeButton.style.zIndex = "1"
-
-      aboutButton.style.transform = "translateX(0)"
-      aboutButton.style.opacity = "1"
-      aboutButton.style.zIndex = "1"
-
-      state = "open";
+    if (state == "closed") {
+      open();
     } else {
-      menuRectangle.style.transform = "rotateZ(0deg)"
-      menuRectangle.style.opacity = "1"
-
-
-      menuCircle.style.opacity = "0"
-
-      homeButton.style.transform = "translateX(-85%)"
-      homeButton.style.opacity = "0"
-      homeButton.style.zIndex = "-1"
-
-      aboutButton.style.transform = "translateX(-210%)"
-      aboutButton.style.opacity = "0"
-      aboutButton.style.zIndex = "-2"
-
-      state = "closed";
+      close();
     }
   }
 </script>
 <div class="mainNav">
-  
   <button id="menu_button" class="menu_button">
-    <svg
-      viewBox="0 0 95 95"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 95 95" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="Menu">
         <circle
           id="menuCircle"
@@ -150,7 +154,7 @@
         </defs>
       </svg>
     </button>
-  
+
     <button id="aboutButton" class="buttons">
       <svg viewBox="0 0 306 92" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="AboutNav">
@@ -183,7 +187,7 @@
     transition: all 0.3s ease;
     scroll-behavior: smooth;
   }
-  
+
   button {
     background: transparent;
     border: none;
@@ -227,19 +231,18 @@
     align-items: center;
   }
 
-  #menuInnerCircle, #menuRectangle {
+  #menuInnerCircle,
+  #menuRectangle {
     transform-origin: center;
     animation-fill-mode: forwards;
   }
 
   #homeButton {
-    
     opacity: 0;
     z-index: -1;
   }
 
   #aboutButton {
-    
     opacity: 0;
     z-index: -2;
   }
