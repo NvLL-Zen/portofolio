@@ -32,24 +32,27 @@ import Scrolldown from '../components/scrolldown.astro';
 
 	h1 {
 		animation: textIntro 1s ease-out;
+        animation-delay: 3.5s;
 		animation-fill-mode: forwards;
         text-shadow: 5px 5px 5px white;
+        opacity: 0;
 	}
 
     svg path {
-        fill: transparent;
-        stroke: white;
-        stroke-width: 0.5;
+        fill: white;
+        stroke: rgb(150, 150, 150);
+        stroke-width: 0.1;
         stroke-dasharray: 210;
         stroke-dashoffset: 0;
         animation: 5s svgAnim ease-in-out;
         animation-fill-mode: forwards;
+        
     }
 
     svg {
         width: 85vw;
         height: fit-content;
-        padding: 2vw
+        padding: 2vw;
     }
 
     @media only screen and (max-width: 720px) {
@@ -60,33 +63,19 @@ import Scrolldown from '../components/scrolldown.astro';
 
     @keyframes textIntro{
         0% {
-			transform: scale(3);
+			transform: scale(1.5) translateY(15vh);
+            filter: brightness(5);
+            opacity: 0;
 		}
+
+        75% {
+            transform: scale(1.5) translateY(0);
+        }
 
 		100% {
-			transform: scale(1);
+            opacity: 1;
+			transform: scale(1) translateY(0);
+            filter: brightness(1);
 		}
-    }
-
-    @keyframes svgAnim {
-        0% {
-            stroke-dashoffset: 210;
-        }
-
-        65% {
-            fill: transparent;
-            text-shadow: ;
-        }
-
-        90% {
-            stroke-width: 0.5;
-
-        }
-
-        100% {
-            stroke-width: 0.1;
-            stroke-dashoffset: 0;
-            fill: #fff;
-        }
     }
 </style>
