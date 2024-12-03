@@ -19,9 +19,11 @@ import Navbar from "../components/navbar.astro";
     <title>V. Zenriel</title>
     <script>
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+      window.onload = () => {
+        main()
+      }
+
+        function main() {
 
         function getRandomInt(min, max) {
           const minCeiled = Math.ceil(min);
@@ -49,6 +51,7 @@ function sleep(ms) {
         outerClock.style.transform = `rotateZ(${getRandomInt(360, 720)}deg) rotateX(${getRandomInt(420, 450)}deg) rotateY(${getRandomInt(420, 450)}deg)`;
         innerClock.style.transform = `rotateZ(${getRandomInt(360, 720)}deg) rotateX(-${getRandomInt(270, 360)}deg) rotateY(-${getRandomInt(270, 360)}deg)`;
         clockNumerals.style.transform = `rotateZ(${getRandomInt(360, 720)}deg) rotateX(${getRandomInt(180, 270)}deg) rotateY(${getRandomInt(180, 270)}deg)`;
+      }
     </script>
     <style>
       :root {
