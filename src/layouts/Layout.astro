@@ -18,13 +18,11 @@ import Navbar from "../components/navbar.astro";
     />
     <title>V. Zenriel</title>
     <script>
-
       window.onload = () => {
-        main()
-      }
+        main();
+      };
 
-        function main() {
-
+      function main() {
         function getRandomInt(min, max) {
           const minCeiled = Math.ceil(min);
           const maxFloored = Math.floor(max);
@@ -35,20 +33,25 @@ import Navbar from "../components/navbar.astro";
         const clockNumerals = document.getElementById("ClockNumerals");
         const innerClock = document.getElementById("InnerClock");
         const outerClock = document.getElementById("OuterClock");
-        
+
         function setArrow() {
           let d = new Date();
           let majorArrowRotation = d.getMinutes();
           let minorArrowRotation = d.getHours();
-          document.documentElement.style.setProperty("--majorArrowDeg", `${6 * majorArrowRotation + 180 + 720}deg`)
-          document.documentElement.style.setProperty("--minorArrowDeg", `${30 * minorArrowRotation + 0.5 * majorArrowRotation + 180 + 720}deg`)
-          console.log("Yolo")
+          document.documentElement.style.setProperty(
+            "--majorArrowDeg",
+            `${6 * majorArrowRotation + 180 + 720}deg`,
+          );
+          document.documentElement.style.setProperty(
+            "--minorArrowDeg",
+            `${30 * minorArrowRotation + 0.5 * majorArrowRotation + 180 + 720}deg`,
+          );
+          console.log("Yolo");
         }
-        setArrow()
-        
+        setArrow();
 
         outerClock.style.transform = `rotateZ(${getRandomInt(360, 720)}deg) rotateX(${getRandomInt(420, 450)}deg) rotateY(${getRandomInt(420, 450)}deg)`;
-        innerClock.style.transform = `rotateZ(${getRandomInt(360, 720)}deg) rotateX(-${getRandomInt(270, 360)}deg) rotateY(-${getRandomInt(270, 360)}deg)`;
+        innerClock.style.transform = `rotateZ(-${getRandomInt(360, 720)}deg) rotateX(${getRandomInt(270, 360)}deg) rotateY(-${getRandomInt(270, 360)}deg)`;
         clockNumerals.style.transform = `rotateZ(${getRandomInt(360, 720)}deg) rotateX(${getRandomInt(180, 270)}deg) rotateY(${getRandomInt(180, 270)}deg)`;
       }
     </script>
@@ -89,7 +92,7 @@ import Navbar from "../components/navbar.astro";
         transform-origin: center;
         animation-fill-mode: forwards;
         width: var(--clockSize);
-        animation: scaleIn 2s linear;
+        animation: scaleIn 2s ease-out;
       }
 
       #MainClock {
@@ -98,7 +101,7 @@ import Navbar from "../components/navbar.astro";
 
       #ClockNumerals {
         transform-origin: center;
-        animation: resetRotation 3s ease-out;
+        animation: resetRotationIC 3s ease-out;
         animation-fill-mode: forwards;
       }
 
@@ -126,7 +129,6 @@ import Navbar from "../components/navbar.astro";
         transform: rotateZ(510deg);
         animation: minorArrowSet 2.5s ease-out;
         animation-fill-mode: forwards;
-        
       }
 
       .romanNumerals {
@@ -150,9 +152,10 @@ import Navbar from "../components/navbar.astro";
       @keyframes scaleIn {
         0% {
           width: 1vw;
-          transform: translateY(25vh);
+          transform: translateY(35vh);
         }
         50% {
+          scale: 2;
           transform: translateY(0vh);
         }
 
@@ -180,6 +183,9 @@ import Navbar from "../components/navbar.astro";
       }
 
       @keyframes resetRotationIC {
+        from {
+          scale: 0.5;
+        }
         to {
           transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg) scale(1);
         }
@@ -197,177 +203,983 @@ import Navbar from "../components/navbar.astro";
   <body>
     <Navbar />
     <div class="clock_container">
-      <svg width="872" height="872" viewBox="0 0 872 872" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="872"
+        height="872"
+        viewBox="0 0 872 872"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g id="MainClock" filter="url(#filter0_d_59_13)">
-        <g id="ClockNumerals">
-        <path class="romanNumerals" id="I" d="M525.137 275.902L525.875 274.623L534.698 279.717L533.96 280.996L530.894 279.683C530.117 280.98 529.328 282.298 528.527 283.637C527.747 284.988 526.967 286.339 526.187 287.69L525.305 289.218C524.537 290.548 523.763 291.889 522.983 293.24C522.236 294.582 521.483 295.935 520.724 297.298L523.394 299.297L522.656 300.575L513.833 295.481L514.571 294.203L517.637 295.516C518.435 294.23 519.223 292.912 520.003 291.561C520.783 290.21 521.563 288.859 522.343 287.508L523.225 285.98C524.005 284.629 524.779 283.289 525.547 281.958C526.327 280.607 527.081 279.255 527.807 277.901L525.137 275.902Z" fill="white"/>
-        <path class="romanNumerals" id="II" d="M589.062 338.469L590.34 337.731L595.434 346.554L594.156 347.292L592.157 344.622C590.836 345.357 589.493 346.105 588.13 346.864C586.779 347.644 585.428 348.424 584.077 349.204L582.55 350.086C581.22 350.854 579.879 351.628 578.528 352.408C577.21 353.197 575.881 353.991 574.542 354.792L575.855 357.858L574.577 358.596L569.483 349.773L570.761 349.035L572.76 351.706C574.094 350.991 575.436 350.244 576.787 349.464C578.138 348.684 579.489 347.904 580.84 347.124L582.367 346.242C583.718 345.462 585.059 344.688 586.389 343.92C587.74 343.14 589.069 342.345 590.375 341.536L589.062 338.469ZM595.742 350.039L597.02 349.301L602.114 358.124L600.836 358.862L598.837 356.192C597.515 356.927 596.173 357.674 594.81 358.433C593.459 359.213 592.108 359.993 590.757 360.773L589.229 361.655C587.899 362.423 586.559 363.197 585.208 363.977C583.889 364.766 582.561 365.561 581.222 366.362L582.535 369.428L581.257 370.166L576.163 361.343L577.441 360.605L579.44 363.275C580.773 362.561 582.115 361.814 583.466 361.034C584.817 360.254 586.168 359.474 587.519 358.694L589.047 357.812C590.398 357.032 591.739 356.258 593.069 355.49C594.42 354.71 595.749 353.915 597.055 353.105L595.742 350.039Z" fill="white"/>
-        <path class="romanNumerals" id="III" d="M617.685 418.536H619.161V428.724H617.685L617.289 425.412C615.777 425.388 614.241 425.364 612.681 425.34C611.121 425.34 609.561 425.34 608.001 425.34H606.237C604.701 425.34 603.153 425.34 601.593 425.34C600.057 425.364 598.509 425.388 596.949 425.412L596.553 428.724H595.077V418.536H596.553L596.949 421.848C598.461 421.896 599.997 421.92 601.557 421.92C603.117 421.92 604.677 421.92 606.237 421.92H608.001C609.561 421.92 611.109 421.92 612.645 421.92C614.205 421.92 615.753 421.896 617.289 421.848L617.685 418.536ZM617.685 431.895H619.161V442.083H617.685L617.289 438.771C615.777 438.747 614.241 438.723 612.681 438.699C611.121 438.699 609.561 438.699 608.001 438.699H606.237C604.701 438.699 603.153 438.699 601.593 438.699C600.057 438.723 598.509 438.747 596.949 438.771L596.553 442.083H595.077V431.895H596.553L596.949 435.207C598.461 435.255 599.997 435.279 601.557 435.279C603.117 435.279 604.677 435.279 606.237 435.279H608.001C609.561 435.279 611.109 435.279 612.645 435.279C614.205 435.279 615.753 435.255 617.289 435.207L617.685 431.895ZM617.685 445.254H619.161V455.442H617.685L617.289 452.13C615.777 452.106 614.241 452.082 612.681 452.058C611.121 452.058 609.561 452.058 608.001 452.058H606.237C604.701 452.058 603.153 452.058 601.593 452.058C600.057 452.082 598.509 452.106 596.949 452.13L596.553 455.442H595.077V445.254H596.553L596.949 448.566C598.461 448.614 599.997 448.638 601.557 448.638C603.117 448.638 604.677 448.638 606.237 448.638H608.001C609.561 448.638 611.109 448.638 612.645 448.638C614.205 448.638 615.753 448.614 617.289 448.566L617.685 445.254Z" fill="white"/>
-        <path class="romanNumerals" id="IV" d="M602.631 512.066L603.909 512.804L598.815 521.628L597.537 520.89L598.85 517.823C597.552 517.046 596.234 516.258 594.895 515.457C593.544 514.677 592.193 513.897 590.842 513.117L589.314 512.235C587.984 511.467 586.644 510.693 585.293 509.913C583.95 509.166 582.598 508.412 581.235 507.653L579.236 510.324L577.957 509.586L583.051 500.762L584.33 501.5L583.017 504.567C584.302 505.364 585.62 506.153 586.971 506.933C588.322 507.713 589.673 508.493 591.024 509.273L592.552 510.155C593.903 510.935 595.244 511.709 596.574 512.477C597.925 513.257 599.277 514.01 600.632 514.737L602.631 512.066ZM596.473 522.732L597.751 523.47L592.837 531.981L591.434 531.171L592.882 528.016L574.924 524.632L586.91 538.287L588.806 535.723L590.209 536.533L586.051 543.735L584.773 542.997L585.965 540.068L570.34 522.276L571.132 520.904L594.842 524.908L596.473 522.732Z" fill="white"/>
-        <path class="romanNumerals" id="V" d="M533.463 588.643L534.201 589.922L525.69 594.836L524.88 593.433L527.711 591.424L513.851 579.514L517.405 597.333L520.328 596.061L521.138 597.464L513.936 601.622L513.198 600.343L515.695 598.403L511.059 575.182L512.431 574.39L530.963 589.713L533.463 588.643Z" fill="white"/>
-        <path class="romanNumerals" id="VI" d="M454.769 618.608V620.084H444.941V618.464L448.397 618.14L442.349 600.896L436.517 618.104L439.685 618.464V620.084H431.369V618.608L434.501 618.176L442.097 595.748H443.681L452.069 618.284L454.769 618.608ZM429.467 618.608V620.084H419.279V618.608L422.591 618.212C422.615 616.7 422.639 615.164 422.663 613.604C422.663 612.044 422.663 610.484 422.663 608.924V607.16C422.663 605.624 422.663 604.076 422.663 602.516C422.639 600.98 422.615 599.432 422.591 597.872L419.279 597.476V596H429.467V597.476L426.155 597.872C426.107 599.384 426.083 600.92 426.083 602.48C426.083 604.04 426.083 605.6 426.083 607.16V608.924C426.083 610.484 426.083 612.032 426.083 613.568C426.083 615.128 426.107 616.676 426.155 618.212L429.467 618.608Z" fill="white"/>
-        <path class="romanNumerals" id="VII" d="M369.685 606.725L368.947 608.003L360.436 603.089L361.246 601.686L364.401 603.133L367.785 585.176L354.131 597.162L356.694 599.058L355.884 600.461L348.682 596.303L349.42 595.025L352.349 596.216L370.141 580.591L371.513 581.383L367.509 605.094L369.685 606.725ZM347.773 594.074L347.035 595.352L338.212 590.258L338.95 588.98L342.017 590.293C342.793 588.995 343.582 587.677 344.383 586.338C345.163 584.987 345.943 583.636 346.723 582.285L347.605 580.757C348.373 579.427 349.147 578.087 349.927 576.736C350.674 575.393 351.427 574.041 352.187 572.678L349.516 570.679L350.254 569.401L359.077 574.495L358.339 575.773L355.273 574.46C354.475 575.745 353.687 577.063 352.907 578.414C352.127 579.765 351.347 581.116 350.567 582.467L349.685 583.995C348.905 585.346 348.131 586.687 347.363 588.017C346.583 589.368 345.829 590.721 345.103 592.075L347.773 594.074ZM336.204 587.394L335.466 588.672L326.643 583.578L327.381 582.3L330.447 583.613C331.224 582.316 332.013 580.997 332.813 579.658C333.593 578.307 334.373 576.956 335.153 575.605L336.035 574.078C336.803 572.748 337.577 571.407 338.357 570.056C339.105 568.714 339.858 567.361 340.617 565.998L337.947 563.999L338.685 562.721L347.508 567.815L346.77 569.093L343.703 567.78C342.906 569.066 342.117 570.384 341.337 571.735C340.557 573.086 339.777 574.437 338.997 575.788L338.115 577.315C337.335 578.666 336.561 580.007 335.793 581.337C335.013 582.688 334.26 584.041 333.533 585.395L336.204 587.394Z" fill="white"/>
-        <path class="romanNumerals" id="VIII" d="M301.678 556.106L300.399 556.844L295.485 548.333L296.888 547.523L298.897 550.354L310.807 536.494L292.988 540.047L294.26 542.971L292.857 543.781L288.699 536.579L289.978 535.841L291.918 538.337L315.139 533.702L315.931 535.073L300.608 553.606L301.678 556.106ZM289.027 534.194L287.749 534.932L282.655 526.109L283.933 525.371L285.932 528.041C287.253 527.306 288.595 526.559 289.958 525.799C291.309 525.019 292.66 524.239 294.011 523.459L295.539 522.577C296.869 521.809 298.21 521.035 299.561 520.255C300.879 519.467 302.208 518.672 303.547 517.871L302.234 514.805L303.512 514.067L308.606 522.89L307.328 523.628L305.329 520.958C303.995 521.672 302.653 522.419 301.302 523.199C299.951 523.979 298.6 524.759 297.249 525.539L295.721 526.421C294.37 527.201 293.03 527.975 291.7 528.743C290.349 529.523 289.02 530.318 287.714 531.128L289.027 534.194ZM282.347 522.624L281.069 523.362L275.975 514.539L277.253 513.801L279.252 516.472C280.574 515.736 281.916 514.989 283.279 514.23C284.63 513.45 285.981 512.67 287.332 511.89L288.859 511.008C290.19 510.24 291.53 509.466 292.881 508.686C294.199 507.897 295.528 507.102 296.867 506.302L295.554 503.235L296.832 502.497L301.926 511.32L300.648 512.058L298.649 509.388C297.316 510.103 295.973 510.85 294.622 511.63C293.271 512.41 291.92 513.19 290.569 513.97L289.042 514.852C287.691 515.632 286.35 516.406 285.02 517.174C283.669 517.954 282.34 518.749 281.034 519.558L282.347 522.624ZM275.667 511.055L274.389 511.793L269.295 502.97L270.573 502.232L272.572 504.902C273.894 504.167 275.236 503.42 276.599 502.66C277.95 501.88 279.301 501.1 280.652 500.32L282.18 499.438C283.51 498.67 284.851 497.896 286.202 497.116C287.52 496.328 288.848 495.533 290.187 494.732L288.874 491.666L290.153 490.928L295.247 499.751L293.968 500.489L291.969 497.819C290.636 498.533 289.294 499.28 287.943 500.06C286.592 500.84 285.241 501.62 283.89 502.4L282.362 503.282C281.011 504.062 279.67 504.836 278.34 505.604C276.989 506.384 275.661 507.179 274.354 507.989L275.667 511.055Z" fill="white"/>
-        <path class="romanNumerals" id="IX" d="M255.392 453.756L253.916 453.756L253.916 443.568L255.392 443.568L255.788 446.88C257.3 446.904 258.836 446.928 260.396 446.952C261.956 446.952 263.516 446.952 265.076 446.952L266.84 446.952C268.376 446.952 269.924 446.952 271.484 446.952C273.02 446.928 274.568 446.904 276.128 446.88L276.524 443.568L278 443.568L278 453.756L276.524 453.756L276.128 450.444C274.616 450.396 273.08 450.372 271.52 450.372C269.96 450.372 268.4 450.372 266.84 450.372L265.076 450.372C263.516 450.372 261.968 450.372 260.432 450.372C258.872 450.372 257.324 450.396 255.788 450.444L255.392 453.756ZM255.392 441.296L253.916 441.296L253.916 431.18L255.392 431.18L255.752 434.348L263.456 429.74L255.824 424.952L255.392 428.012L253.916 428.012L253.916 419.768L255.392 419.768L255.788 422.936L264.932 428.84L276.164 422.072L276.524 418.976L278 418.976L278 429.164L276.524 429.164L276.128 425.852L267.776 430.892L276.128 436.184L276.524 433.376L278 433.376L278 441.62L276.524 441.62L276.092 438.2L266.336 431.756L255.752 438.128L255.392 441.296Z" fill="white"/>
-        <path class="romanNumerals" id="X" d="M274.515 353.853L273.237 353.115L278.295 344.354L279.573 345.092L278.301 348.016L287.277 347.877L283.062 339.915L281.157 342.349L279.879 341.611L284.001 334.471L285.279 335.209L284.038 338.151L289.005 347.836L302.117 347.59L303.976 345.089L305.255 345.827L300.161 354.65L298.882 353.912L300.195 350.846L290.442 351.035L295.029 359.794L296.776 357.56L298.055 358.298L293.933 365.437L292.654 364.699L293.99 361.522L288.763 351.063L276.411 351.289L274.515 353.853Z" fill="white"/>
-        <path class="romanNumerals" id="XI" d="M329.8 288.171L329.062 286.893L337.823 281.835L338.561 283.113L335.998 285.009L343.84 289.377L344.171 280.373L341.305 281.529L340.567 280.251L347.706 276.129L348.444 277.407L345.899 279.334L345.358 290.205L356.835 296.548L359.696 295.312L360.434 296.59L351.611 301.684L350.873 300.406L353.543 298.407L345.003 293.694L344.596 303.573L347.225 302.512L347.963 303.79L340.824 307.912L340.086 306.634L342.832 304.55L343.534 292.879L332.724 286.899L329.8 288.171ZM350.796 276.049L350.058 274.771L358.881 269.677L359.619 270.955L356.949 272.954C357.684 274.275 358.431 275.618 359.191 276.981C359.971 278.332 360.751 279.683 361.531 281.034L362.413 282.561C363.181 283.892 363.955 285.232 364.735 286.583C365.523 287.901 366.318 289.23 367.119 290.569L370.185 289.256L370.923 290.534L362.1 295.628L361.362 294.35L364.032 292.351C363.318 291.018 362.571 289.675 361.791 288.324C361.011 286.973 360.231 285.622 359.451 284.271L358.569 282.744C357.789 281.393 357.015 280.052 356.247 278.722C355.467 277.371 354.672 276.042 353.862 274.736L350.796 276.049Z" fill="white"/>
-        <path class="romanNumerals" id="XII" d="M411.763 257.392V255.916H421.879V257.392L418.711 257.752L423.319 265.456L428.107 257.824L425.047 257.392V255.916H433.291V257.392L430.123 257.788L424.219 266.932L430.987 278.164L434.083 278.524V280H423.895V278.524L427.207 278.128L422.167 269.776L416.875 278.128L419.683 278.524V280H411.439V278.524L414.859 278.092L421.303 268.336L414.931 257.752L411.763 257.392ZM436.007 257.392V255.916H446.195V257.392L442.883 257.788C442.859 259.3 442.835 260.836 442.811 262.396C442.811 263.956 442.811 265.516 442.811 267.076V268.84C442.811 270.376 442.811 271.924 442.811 273.484C442.835 275.02 442.859 276.568 442.883 278.128L446.195 278.524V280H436.007V278.524L439.319 278.128C439.367 276.616 439.391 275.08 439.391 273.52C439.391 271.96 439.391 270.4 439.391 268.84V267.076C439.391 265.516 439.391 263.968 439.391 262.432C439.391 260.872 439.367 259.324 439.319 257.788L436.007 257.392ZM449.366 257.392V255.916H459.554V257.392L456.242 257.788C456.218 259.3 456.194 260.836 456.17 262.396C456.17 263.956 456.17 265.516 456.17 267.076V268.84C456.17 270.376 456.17 271.924 456.17 273.484C456.194 275.02 456.218 276.568 456.242 278.128L459.554 278.524V280H449.366V278.524L452.678 278.128C452.726 276.616 452.75 275.08 452.75 273.52C452.75 271.96 452.75 270.4 452.75 268.84V267.076C452.75 265.516 452.75 263.968 452.75 262.432C452.75 260.872 452.726 259.324 452.678 257.788L449.366 257.392Z" fill="white"/>
-        </g>
-        <g id="InnerClock">
-        <circle id="Ellipse 2" cx="436.5" cy="437.5" r="145.5" stroke="white" stroke-width="5"/>
-        <circle id="Ellipse 3" cx="436.5" cy="437.5" r="130.5" stroke="white" stroke-width="5"/>
-        <g id="Radial">
-        <line id="Line 14" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-1 0 0 1 306.014 437.5)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_2" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.965926 -0.258819 -0.258819 0.965926 310.46 403.728)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_3" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.866026 -0.5 -0.5 0.866026 323.496 372.258)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_4" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 344.232 345.233)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_5" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.5 -0.866026 -0.866026 0.5 371.257 324.497)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_6" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.258819 -0.965926 -0.965926 0.258819 402.728 311.461)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_7" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0 -1 -1 0 436.5 307.015)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_8" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.258819 -0.965926 -0.965926 -0.258819 470.272 311.461)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_9" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.5 -0.866026 -0.866026 -0.5 501.743 324.497)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_10" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.707107 -0.707107 -0.707107 -0.707107 528.767 345.233)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_11" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.866026 -0.5 -0.5 -0.866026 549.504 372.258)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_12" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.965926 -0.258819 -0.258819 -0.965926 562.539 403.728)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_13" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(1 0 0 -1 566.986 437.5)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_14" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.965926 0.258819 0.258819 -0.965926 562.539 471.273)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_15" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.866026 0.5 0.5 -0.866026 549.504 502.743)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_16" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.707107 0.707107 0.707107 -0.707107 528.767 529.768)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_17" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.5 0.866026 0.866026 -0.5 501.743 550.504)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_18" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0.258819 0.965926 0.965926 -0.258819 470.272 563.54)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_19" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(0 1 1 0 436.5 567.986)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_20" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.258819 0.965926 0.965926 0.258819 402.728 563.54)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_21" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.5 0.866026 0.866026 0.5 371.257 550.504)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_22" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.707107 0.707107 0.707107 0.707107 344.232 529.768)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_23" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.866026 0.5 0.5 0.866026 323.496 502.743)" stroke="white" stroke-width="5"/>
-        <line id="Line 14_24" y1="-2.5" x2="13.0143" y2="-2.5" transform="matrix(-0.965926 0.258819 0.258819 0.965926 310.46 471.273)" stroke="white" stroke-width="5"/>
-        </g>
-        </g>
-        <g id="OuterClock">
-        <path id="HalfDownClock" d="M654 436C654 493.817 631.032 549.266 590.149 590.149C549.266 631.032 493.817 654 436 654C378.183 654 322.734 631.032 281.851 590.149C240.968 549.266 218 493.817 218 436L238.243 436C238.243 488.448 259.078 538.749 296.165 575.835C333.251 612.922 383.552 633.757 436 633.757C488.448 633.757 538.749 612.922 575.835 575.835C612.922 538.749 633.757 488.448 633.757 436L654 436Z" fill="white"/>
-        <g id="HalfUpClock">
-        <path id="Dot" d="M236.542 438H221" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_2" d="M236.816 427.561L221.295 426.748" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_3" d="M237.635 417.151L222.178 415.526" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_4" d="M238.998 406.798L223.647 404.367" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_5" d="M240.901 396.53L225.698 393.299" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_6" d="M243.339 386.376L228.326 382.354" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_7" d="M246.304 376.364L231.523 371.561" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_8" d="M249.79 366.521L235.28 360.951" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_9" d="M253.786 356.873L239.588 350.552" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_10" d="M258.282 347.448L244.434 340.392" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_11" d="M263.264 338.271L249.804 330.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_12" d="M268.721 329.367L255.686 320.903" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_13" d="M274.635 320.762L262.061 311.626" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_14" d="M280.992 312.477L268.914 302.696" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_15" d="M287.774 304.537L276.224 294.137" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_16" d="M294.962 296.962L283.972 285.972" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_17" d="M302.537 289.774L292.137 278.224" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_18" d="M310.477 282.992L300.696 270.914" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_19" d="M318.762 276.635L309.626 264.061" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_20" d="M327.367 270.721L318.903 257.686" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_21" d="M336.271 265.264L328.5 251.805" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_22" d="M345.448 260.282L338.392 246.434" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_23" d="M354.873 255.786L348.552 241.588" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_24" d="M364.521 251.79L358.951 237.28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_25" d="M374.364 248.304L369.561 233.523" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_26" d="M384.376 245.339L380.354 230.326" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_27" d="M394.53 242.901L391.299 227.698" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_28" d="M404.798 240.998L402.367 225.647" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_29" d="M415.151 239.635L413.526 224.178" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_30" d="M425.561 238.815L424.748 223.295" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_31" d="M436 238.542V223" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_32" d="M446.439 238.815L447.252 223.295" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_33" d="M456.849 239.635L458.474 224.178" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_34" d="M467.202 240.998L469.633 225.647" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_35" d="M477.47 242.901L480.701 227.698" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_36" d="M487.624 245.339L491.646 230.326" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_37" d="M497.636 248.304L502.439 233.523" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_38" d="M507.479 251.79L513.049 237.28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_39" d="M517.127 255.786L523.448 241.588" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_40" d="M526.552 260.282L533.608 246.434" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_41" d="M535.729 265.264L543.5 251.805" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_42" d="M544.633 270.721L553.097 257.686" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_43" d="M553.238 276.635L562.374 264.061" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_44" d="M561.523 282.992L571.304 270.914" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_45" d="M569.463 289.774L579.863 278.224" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_46" d="M577.038 296.962L588.028 285.972" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_47" d="M584.226 304.537L595.776 294.137" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_48" d="M591.008 312.477L603.086 302.696" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_49" d="M597.365 320.762L609.939 311.626" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_50" d="M603.279 329.367L616.314 320.903" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_51" d="M608.736 338.271L622.196 330.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_52" d="M613.718 347.448L627.566 340.392" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_53" d="M618.214 356.873L632.412 350.552" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_54" d="M622.21 366.521L636.72 360.951" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_55" d="M625.696 376.364L640.477 371.561" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_56" d="M628.661 386.376L643.674 382.354" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_57" d="M631.099 396.53L646.302 393.299" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_58" d="M633.002 406.798L648.353 404.367" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_59" d="M634.365 417.151L649.822 415.526" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_60" d="M635.185 427.561L650.705 426.748" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="Dot_61" d="M635.458 438H651" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </g>
-        <g id="90degLines">
-        <path id="Line 9" d="M248 438L238 432.226V443.774L248 438ZM239 437H219V439H239V437Z" fill="white"/>
-        <path id="Line 11" d="M436 249L441.774 239L430.226 239L436 249ZM437 240L437 220L435 220L435 240L437 240Z" fill="white"/>
-        <path id="Line 12" d="M436 625L430.226 635L441.774 635L436 625ZM435 634L435 654L437 654L437 634L435 634Z" fill="white"/>
-        <path id="Line 10" d="M625 437L635 442.774L635 431.226L625 437ZM634 438L654 438L654 436L634 436L634 438Z" fill="white"/>
-        </g>
-        </g>
-        <g id="MajorArrow">
-        <g id="Group 1">
-        <path id="Polygon 1" d="M428.26 437.029L436 422.307L443.74 437.029L436 451.751L428.26 437.029Z" stroke="white" stroke-width="4"/>
-        <line id="Line 15" y1="-2" x2="30.6464" y2="-2" transform="matrix(0.454499 0.890747 -0.476341 0.879261 426 437.029)" stroke="white" stroke-width="4"/>
-        <line id="Line 17" y1="-2" x2="21.1501" y2="-2" transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.55 462.615)" stroke="white" stroke-width="4"/>
-        <line id="Line 18" y1="-2" x2="21.1501" y2="-2" transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.08 462.231)" stroke="white" stroke-width="4"/>
-        <line id="Line 19" y1="-2" x2="21.1501" y2="-2" transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.5 479.258)" stroke="white" stroke-width="4"/>
-        <line id="Line 20" y1="-2" x2="21.1501" y2="-2" transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.258 479.349)" stroke="white" stroke-width="4"/>
-        <line id="Line 21" y1="-2" x2="21.1501" y2="-2" transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.25 496.467)" stroke="white" stroke-width="4"/>
-        <line id="Line 22" y1="-2" x2="21.1501" y2="-2" transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.008 496.557)" stroke="white" stroke-width="4"/>
-        <line id="Line 23" y1="-2" x2="21.1501" y2="-2" transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.5 513.109)" stroke="white" stroke-width="4"/>
-        <line id="Line 24" y1="-2" x2="21.1501" y2="-2" transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.258 513.2)" stroke="white" stroke-width="4"/>
-        <line id="Line 16" y1="-2" x2="30.6464" y2="-2" transform="matrix(-0.454499 0.890747 0.476341 0.879261 445.652 437.505)" stroke="white" stroke-width="4"/>
-        <line id="Line 25" y1="-2" x2="31.0768" y2="-2" transform="matrix(0.1395 0.990222 -0.890965 0.454071 430.5 530.227)" stroke="white" stroke-width="4"/>
-        <line id="Line 26" y1="-2" x2="30.613" y2="-2" transform="matrix(-0.1395 0.990222 0.890965 0.454071 441.178 530.227)" stroke="white" stroke-width="4"/>
-        </g>
-        </g>
-        <g id="MinorArrow">
-        <g id="Group 1_2">
-        <path id="Polygon 1_2" d="M427.887 437.387L436 426.764L444.113 437.387L436 448.01L427.887 437.387Z" stroke="white" stroke-width="3"/>
-        <line id="Line 15_2" y1="-1.5" x2="23.3922" y2="-1.5" transform="matrix(0.595443 0.803397 -0.618408 0.785857 426 437.387)" stroke="white" stroke-width="3"/>
-        <line id="Line 17_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.55 455.002)" stroke="white" stroke-width="3"/>
-        <line id="Line 18_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.08 454.737)" stroke="white" stroke-width="3"/>
-        <line id="Line 19_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.5 466.459)" stroke="white" stroke-width="3"/>
-        <line id="Line 20_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.258 466.522)" stroke="white" stroke-width="3"/>
-        <line id="Line 21_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.25 478.306)" stroke="white" stroke-width="3"/>
-        <line id="Line 22_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.008 478.369)" stroke="white" stroke-width="3"/>
-        <line id="Line 23_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.5 489.764)" stroke="white" stroke-width="3"/>
-        <line id="Line 24_2" y1="-1.5" x2="16.111" y2="-1.5" transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.258 489.826)" stroke="white" stroke-width="3"/>
-        <line id="Line 16_2" y1="-1.5" x2="23.3922" y2="-1.5" transform="matrix(-0.595443 0.803397 0.618408 0.785857 445.652 437.714)" stroke="white" stroke-width="3"/>
-        <line id="Line 25_2" y1="-1.5" x2="21.6245" y2="-1.5" transform="matrix(0.200477 0.979698 -0.943605 0.331072 430.5 501.549)" stroke="white" stroke-width="3"/>
-        <line id="Line 26_2" y1="-1.5" x2="21.3017" y2="-1.5" transform="matrix(-0.200477 0.979698 0.943605 0.331072 441.178 501.549)" stroke="white" stroke-width="3"/>
-        </g>
-        </g>
+          <g id="ClockNumerals">
+            <path
+              class="romanNumerals"
+              id="I"
+              d="M525.137 275.902L525.875 274.623L534.698 279.717L533.96 280.996L530.894 279.683C530.117 280.98 529.328 282.298 528.527 283.637C527.747 284.988 526.967 286.339 526.187 287.69L525.305 289.218C524.537 290.548 523.763 291.889 522.983 293.24C522.236 294.582 521.483 295.935 520.724 297.298L523.394 299.297L522.656 300.575L513.833 295.481L514.571 294.203L517.637 295.516C518.435 294.23 519.223 292.912 520.003 291.561C520.783 290.21 521.563 288.859 522.343 287.508L523.225 285.98C524.005 284.629 524.779 283.289 525.547 281.958C526.327 280.607 527.081 279.255 527.807 277.901L525.137 275.902Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="II"
+              d="M589.062 338.469L590.34 337.731L595.434 346.554L594.156 347.292L592.157 344.622C590.836 345.357 589.493 346.105 588.13 346.864C586.779 347.644 585.428 348.424 584.077 349.204L582.55 350.086C581.22 350.854 579.879 351.628 578.528 352.408C577.21 353.197 575.881 353.991 574.542 354.792L575.855 357.858L574.577 358.596L569.483 349.773L570.761 349.035L572.76 351.706C574.094 350.991 575.436 350.244 576.787 349.464C578.138 348.684 579.489 347.904 580.84 347.124L582.367 346.242C583.718 345.462 585.059 344.688 586.389 343.92C587.74 343.14 589.069 342.345 590.375 341.536L589.062 338.469ZM595.742 350.039L597.02 349.301L602.114 358.124L600.836 358.862L598.837 356.192C597.515 356.927 596.173 357.674 594.81 358.433C593.459 359.213 592.108 359.993 590.757 360.773L589.229 361.655C587.899 362.423 586.559 363.197 585.208 363.977C583.889 364.766 582.561 365.561 581.222 366.362L582.535 369.428L581.257 370.166L576.163 361.343L577.441 360.605L579.44 363.275C580.773 362.561 582.115 361.814 583.466 361.034C584.817 360.254 586.168 359.474 587.519 358.694L589.047 357.812C590.398 357.032 591.739 356.258 593.069 355.49C594.42 354.71 595.749 353.915 597.055 353.105L595.742 350.039Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="III"
+              d="M617.685 418.536H619.161V428.724H617.685L617.289 425.412C615.777 425.388 614.241 425.364 612.681 425.34C611.121 425.34 609.561 425.34 608.001 425.34H606.237C604.701 425.34 603.153 425.34 601.593 425.34C600.057 425.364 598.509 425.388 596.949 425.412L596.553 428.724H595.077V418.536H596.553L596.949 421.848C598.461 421.896 599.997 421.92 601.557 421.92C603.117 421.92 604.677 421.92 606.237 421.92H608.001C609.561 421.92 611.109 421.92 612.645 421.92C614.205 421.92 615.753 421.896 617.289 421.848L617.685 418.536ZM617.685 431.895H619.161V442.083H617.685L617.289 438.771C615.777 438.747 614.241 438.723 612.681 438.699C611.121 438.699 609.561 438.699 608.001 438.699H606.237C604.701 438.699 603.153 438.699 601.593 438.699C600.057 438.723 598.509 438.747 596.949 438.771L596.553 442.083H595.077V431.895H596.553L596.949 435.207C598.461 435.255 599.997 435.279 601.557 435.279C603.117 435.279 604.677 435.279 606.237 435.279H608.001C609.561 435.279 611.109 435.279 612.645 435.279C614.205 435.279 615.753 435.255 617.289 435.207L617.685 431.895ZM617.685 445.254H619.161V455.442H617.685L617.289 452.13C615.777 452.106 614.241 452.082 612.681 452.058C611.121 452.058 609.561 452.058 608.001 452.058H606.237C604.701 452.058 603.153 452.058 601.593 452.058C600.057 452.082 598.509 452.106 596.949 452.13L596.553 455.442H595.077V445.254H596.553L596.949 448.566C598.461 448.614 599.997 448.638 601.557 448.638C603.117 448.638 604.677 448.638 606.237 448.638H608.001C609.561 448.638 611.109 448.638 612.645 448.638C614.205 448.638 615.753 448.614 617.289 448.566L617.685 445.254Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="IV"
+              d="M602.631 512.066L603.909 512.804L598.815 521.628L597.537 520.89L598.85 517.823C597.552 517.046 596.234 516.258 594.895 515.457C593.544 514.677 592.193 513.897 590.842 513.117L589.314 512.235C587.984 511.467 586.644 510.693 585.293 509.913C583.95 509.166 582.598 508.412 581.235 507.653L579.236 510.324L577.957 509.586L583.051 500.762L584.33 501.5L583.017 504.567C584.302 505.364 585.62 506.153 586.971 506.933C588.322 507.713 589.673 508.493 591.024 509.273L592.552 510.155C593.903 510.935 595.244 511.709 596.574 512.477C597.925 513.257 599.277 514.01 600.632 514.737L602.631 512.066ZM596.473 522.732L597.751 523.47L592.837 531.981L591.434 531.171L592.882 528.016L574.924 524.632L586.91 538.287L588.806 535.723L590.209 536.533L586.051 543.735L584.773 542.997L585.965 540.068L570.34 522.276L571.132 520.904L594.842 524.908L596.473 522.732Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="V"
+              d="M533.463 588.643L534.201 589.922L525.69 594.836L524.88 593.433L527.711 591.424L513.851 579.514L517.405 597.333L520.328 596.061L521.138 597.464L513.936 601.622L513.198 600.343L515.695 598.403L511.059 575.182L512.431 574.39L530.963 589.713L533.463 588.643Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="VI"
+              d="M454.769 618.608V620.084H444.941V618.464L448.397 618.14L442.349 600.896L436.517 618.104L439.685 618.464V620.084H431.369V618.608L434.501 618.176L442.097 595.748H443.681L452.069 618.284L454.769 618.608ZM429.467 618.608V620.084H419.279V618.608L422.591 618.212C422.615 616.7 422.639 615.164 422.663 613.604C422.663 612.044 422.663 610.484 422.663 608.924V607.16C422.663 605.624 422.663 604.076 422.663 602.516C422.639 600.98 422.615 599.432 422.591 597.872L419.279 597.476V596H429.467V597.476L426.155 597.872C426.107 599.384 426.083 600.92 426.083 602.48C426.083 604.04 426.083 605.6 426.083 607.16V608.924C426.083 610.484 426.083 612.032 426.083 613.568C426.083 615.128 426.107 616.676 426.155 618.212L429.467 618.608Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="VII"
+              d="M369.685 606.725L368.947 608.003L360.436 603.089L361.246 601.686L364.401 603.133L367.785 585.176L354.131 597.162L356.694 599.058L355.884 600.461L348.682 596.303L349.42 595.025L352.349 596.216L370.141 580.591L371.513 581.383L367.509 605.094L369.685 606.725ZM347.773 594.074L347.035 595.352L338.212 590.258L338.95 588.98L342.017 590.293C342.793 588.995 343.582 587.677 344.383 586.338C345.163 584.987 345.943 583.636 346.723 582.285L347.605 580.757C348.373 579.427 349.147 578.087 349.927 576.736C350.674 575.393 351.427 574.041 352.187 572.678L349.516 570.679L350.254 569.401L359.077 574.495L358.339 575.773L355.273 574.46C354.475 575.745 353.687 577.063 352.907 578.414C352.127 579.765 351.347 581.116 350.567 582.467L349.685 583.995C348.905 585.346 348.131 586.687 347.363 588.017C346.583 589.368 345.829 590.721 345.103 592.075L347.773 594.074ZM336.204 587.394L335.466 588.672L326.643 583.578L327.381 582.3L330.447 583.613C331.224 582.316 332.013 580.997 332.813 579.658C333.593 578.307 334.373 576.956 335.153 575.605L336.035 574.078C336.803 572.748 337.577 571.407 338.357 570.056C339.105 568.714 339.858 567.361 340.617 565.998L337.947 563.999L338.685 562.721L347.508 567.815L346.77 569.093L343.703 567.78C342.906 569.066 342.117 570.384 341.337 571.735C340.557 573.086 339.777 574.437 338.997 575.788L338.115 577.315C337.335 578.666 336.561 580.007 335.793 581.337C335.013 582.688 334.26 584.041 333.533 585.395L336.204 587.394Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="VIII"
+              d="M301.678 556.106L300.399 556.844L295.485 548.333L296.888 547.523L298.897 550.354L310.807 536.494L292.988 540.047L294.26 542.971L292.857 543.781L288.699 536.579L289.978 535.841L291.918 538.337L315.139 533.702L315.931 535.073L300.608 553.606L301.678 556.106ZM289.027 534.194L287.749 534.932L282.655 526.109L283.933 525.371L285.932 528.041C287.253 527.306 288.595 526.559 289.958 525.799C291.309 525.019 292.66 524.239 294.011 523.459L295.539 522.577C296.869 521.809 298.21 521.035 299.561 520.255C300.879 519.467 302.208 518.672 303.547 517.871L302.234 514.805L303.512 514.067L308.606 522.89L307.328 523.628L305.329 520.958C303.995 521.672 302.653 522.419 301.302 523.199C299.951 523.979 298.6 524.759 297.249 525.539L295.721 526.421C294.37 527.201 293.03 527.975 291.7 528.743C290.349 529.523 289.02 530.318 287.714 531.128L289.027 534.194ZM282.347 522.624L281.069 523.362L275.975 514.539L277.253 513.801L279.252 516.472C280.574 515.736 281.916 514.989 283.279 514.23C284.63 513.45 285.981 512.67 287.332 511.89L288.859 511.008C290.19 510.24 291.53 509.466 292.881 508.686C294.199 507.897 295.528 507.102 296.867 506.302L295.554 503.235L296.832 502.497L301.926 511.32L300.648 512.058L298.649 509.388C297.316 510.103 295.973 510.85 294.622 511.63C293.271 512.41 291.92 513.19 290.569 513.97L289.042 514.852C287.691 515.632 286.35 516.406 285.02 517.174C283.669 517.954 282.34 518.749 281.034 519.558L282.347 522.624ZM275.667 511.055L274.389 511.793L269.295 502.97L270.573 502.232L272.572 504.902C273.894 504.167 275.236 503.42 276.599 502.66C277.95 501.88 279.301 501.1 280.652 500.32L282.18 499.438C283.51 498.67 284.851 497.896 286.202 497.116C287.52 496.328 288.848 495.533 290.187 494.732L288.874 491.666L290.153 490.928L295.247 499.751L293.968 500.489L291.969 497.819C290.636 498.533 289.294 499.28 287.943 500.06C286.592 500.84 285.241 501.62 283.89 502.4L282.362 503.282C281.011 504.062 279.67 504.836 278.34 505.604C276.989 506.384 275.661 507.179 274.354 507.989L275.667 511.055Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="IX"
+              d="M255.392 453.756L253.916 453.756L253.916 443.568L255.392 443.568L255.788 446.88C257.3 446.904 258.836 446.928 260.396 446.952C261.956 446.952 263.516 446.952 265.076 446.952L266.84 446.952C268.376 446.952 269.924 446.952 271.484 446.952C273.02 446.928 274.568 446.904 276.128 446.88L276.524 443.568L278 443.568L278 453.756L276.524 453.756L276.128 450.444C274.616 450.396 273.08 450.372 271.52 450.372C269.96 450.372 268.4 450.372 266.84 450.372L265.076 450.372C263.516 450.372 261.968 450.372 260.432 450.372C258.872 450.372 257.324 450.396 255.788 450.444L255.392 453.756ZM255.392 441.296L253.916 441.296L253.916 431.18L255.392 431.18L255.752 434.348L263.456 429.74L255.824 424.952L255.392 428.012L253.916 428.012L253.916 419.768L255.392 419.768L255.788 422.936L264.932 428.84L276.164 422.072L276.524 418.976L278 418.976L278 429.164L276.524 429.164L276.128 425.852L267.776 430.892L276.128 436.184L276.524 433.376L278 433.376L278 441.62L276.524 441.62L276.092 438.2L266.336 431.756L255.752 438.128L255.392 441.296Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="X"
+              d="M274.515 353.853L273.237 353.115L278.295 344.354L279.573 345.092L278.301 348.016L287.277 347.877L283.062 339.915L281.157 342.349L279.879 341.611L284.001 334.471L285.279 335.209L284.038 338.151L289.005 347.836L302.117 347.59L303.976 345.089L305.255 345.827L300.161 354.65L298.882 353.912L300.195 350.846L290.442 351.035L295.029 359.794L296.776 357.56L298.055 358.298L293.933 365.437L292.654 364.699L293.99 361.522L288.763 351.063L276.411 351.289L274.515 353.853Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="XI"
+              d="M329.8 288.171L329.062 286.893L337.823 281.835L338.561 283.113L335.998 285.009L343.84 289.377L344.171 280.373L341.305 281.529L340.567 280.251L347.706 276.129L348.444 277.407L345.899 279.334L345.358 290.205L356.835 296.548L359.696 295.312L360.434 296.59L351.611 301.684L350.873 300.406L353.543 298.407L345.003 293.694L344.596 303.573L347.225 302.512L347.963 303.79L340.824 307.912L340.086 306.634L342.832 304.55L343.534 292.879L332.724 286.899L329.8 288.171ZM350.796 276.049L350.058 274.771L358.881 269.677L359.619 270.955L356.949 272.954C357.684 274.275 358.431 275.618 359.191 276.981C359.971 278.332 360.751 279.683 361.531 281.034L362.413 282.561C363.181 283.892 363.955 285.232 364.735 286.583C365.523 287.901 366.318 289.23 367.119 290.569L370.185 289.256L370.923 290.534L362.1 295.628L361.362 294.35L364.032 292.351C363.318 291.018 362.571 289.675 361.791 288.324C361.011 286.973 360.231 285.622 359.451 284.271L358.569 282.744C357.789 281.393 357.015 280.052 356.247 278.722C355.467 277.371 354.672 276.042 353.862 274.736L350.796 276.049Z"
+              fill="white"></path>
+            <path
+              class="romanNumerals"
+              id="XII"
+              d="M411.763 257.392V255.916H421.879V257.392L418.711 257.752L423.319 265.456L428.107 257.824L425.047 257.392V255.916H433.291V257.392L430.123 257.788L424.219 266.932L430.987 278.164L434.083 278.524V280H423.895V278.524L427.207 278.128L422.167 269.776L416.875 278.128L419.683 278.524V280H411.439V278.524L414.859 278.092L421.303 268.336L414.931 257.752L411.763 257.392ZM436.007 257.392V255.916H446.195V257.392L442.883 257.788C442.859 259.3 442.835 260.836 442.811 262.396C442.811 263.956 442.811 265.516 442.811 267.076V268.84C442.811 270.376 442.811 271.924 442.811 273.484C442.835 275.02 442.859 276.568 442.883 278.128L446.195 278.524V280H436.007V278.524L439.319 278.128C439.367 276.616 439.391 275.08 439.391 273.52C439.391 271.96 439.391 270.4 439.391 268.84V267.076C439.391 265.516 439.391 263.968 439.391 262.432C439.391 260.872 439.367 259.324 439.319 257.788L436.007 257.392ZM449.366 257.392V255.916H459.554V257.392L456.242 257.788C456.218 259.3 456.194 260.836 456.17 262.396C456.17 263.956 456.17 265.516 456.17 267.076V268.84C456.17 270.376 456.17 271.924 456.17 273.484C456.194 275.02 456.218 276.568 456.242 278.128L459.554 278.524V280H449.366V278.524L452.678 278.128C452.726 276.616 452.75 275.08 452.75 273.52C452.75 271.96 452.75 270.4 452.75 268.84V267.076C452.75 265.516 452.75 263.968 452.75 262.432C452.75 260.872 452.726 259.324 452.678 257.788L449.366 257.392Z"
+              fill="white"></path>
+          </g>
+          <g id="InnerClock">
+            <circle
+              id="Ellipse 2"
+              cx="436.5"
+              cy="437.5"
+              r="145.5"
+              stroke="white"
+              stroke-width="5"></circle>
+            <circle
+              id="Ellipse 3"
+              cx="436.5"
+              cy="437.5"
+              r="130.5"
+              stroke="white"
+              stroke-width="5"></circle>
+            <g id="Radial">
+              <line
+                id="Line 14"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-1 0 0 1 306.014 437.5)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_2"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.965926 -0.258819 -0.258819 0.965926 310.46 403.728)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_3"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.866026 -0.5 -0.5 0.866026 323.496 372.258)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_4"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 344.232 345.233)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_5"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.5 -0.866026 -0.866026 0.5 371.257 324.497)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_6"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.258819 -0.965926 -0.965926 0.258819 402.728 311.461)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_7"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0 -1 -1 0 436.5 307.015)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_8"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.258819 -0.965926 -0.965926 -0.258819 470.272 311.461)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_9"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.5 -0.866026 -0.866026 -0.5 501.743 324.497)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_10"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.707107 -0.707107 -0.707107 -0.707107 528.767 345.233)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_11"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.866026 -0.5 -0.5 -0.866026 549.504 372.258)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_12"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.965926 -0.258819 -0.258819 -0.965926 562.539 403.728)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_13"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(1 0 0 -1 566.986 437.5)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_14"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.965926 0.258819 0.258819 -0.965926 562.539 471.273)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_15"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.866026 0.5 0.5 -0.866026 549.504 502.743)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_16"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.707107 0.707107 0.707107 -0.707107 528.767 529.768)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_17"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.5 0.866026 0.866026 -0.5 501.743 550.504)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_18"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0.258819 0.965926 0.965926 -0.258819 470.272 563.54)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_19"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(0 1 1 0 436.5 567.986)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_20"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.258819 0.965926 0.965926 0.258819 402.728 563.54)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_21"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.5 0.866026 0.866026 0.5 371.257 550.504)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_22"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.707107 0.707107 0.707107 0.707107 344.232 529.768)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_23"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.866026 0.5 0.5 0.866026 323.496 502.743)"
+                stroke="white"
+                stroke-width="5"></line>
+              <line
+                id="Line 14_24"
+                y1="-2.5"
+                x2="13.0143"
+                y2="-2.5"
+                transform="matrix(-0.965926 0.258819 0.258819 0.965926 310.46 471.273)"
+                stroke="white"
+                stroke-width="5"></line>
+            </g>
+          </g>
+          <g id="OuterClock">
+            <path
+              id="HalfDownClock"
+              d="M654 436C654 493.817 631.032 549.266 590.149 590.149C549.266 631.032 493.817 654 436 654C378.183 654 322.734 631.032 281.851 590.149C240.968 549.266 218 493.817 218 436L238.243 436C238.243 488.448 259.078 538.749 296.165 575.835C333.251 612.922 383.552 633.757 436 633.757C488.448 633.757 538.749 612.922 575.835 575.835C612.922 538.749 633.757 488.448 633.757 436L654 436Z"
+              fill="white"></path>
+            <g id="HalfUpClock">
+              <path
+                id="Dot"
+                d="M236.542 438H221"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_2"
+                d="M236.816 427.561L221.295 426.748"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_3"
+                d="M237.635 417.151L222.178 415.526"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_4"
+                d="M238.998 406.798L223.647 404.367"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_5"
+                d="M240.901 396.53L225.698 393.299"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_6"
+                d="M243.339 386.376L228.326 382.354"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_7"
+                d="M246.304 376.364L231.523 371.561"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_8"
+                d="M249.79 366.521L235.28 360.951"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_9"
+                d="M253.786 356.873L239.588 350.552"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_10"
+                d="M258.282 347.448L244.434 340.392"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_11"
+                d="M263.264 338.271L249.804 330.5"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_12"
+                d="M268.721 329.367L255.686 320.903"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_13"
+                d="M274.635 320.762L262.061 311.626"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_14"
+                d="M280.992 312.477L268.914 302.696"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_15"
+                d="M287.774 304.537L276.224 294.137"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_16"
+                d="M294.962 296.962L283.972 285.972"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_17"
+                d="M302.537 289.774L292.137 278.224"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_18"
+                d="M310.477 282.992L300.696 270.914"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_19"
+                d="M318.762 276.635L309.626 264.061"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_20"
+                d="M327.367 270.721L318.903 257.686"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_21"
+                d="M336.271 265.264L328.5 251.805"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_22"
+                d="M345.448 260.282L338.392 246.434"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_23"
+                d="M354.873 255.786L348.552 241.588"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_24"
+                d="M364.521 251.79L358.951 237.28"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_25"
+                d="M374.364 248.304L369.561 233.523"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_26"
+                d="M384.376 245.339L380.354 230.326"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_27"
+                d="M394.53 242.901L391.299 227.698"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_28"
+                d="M404.798 240.998L402.367 225.647"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_29"
+                d="M415.151 239.635L413.526 224.178"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_30"
+                d="M425.561 238.815L424.748 223.295"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_31"
+                d="M436 238.542V223"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_32"
+                d="M446.439 238.815L447.252 223.295"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_33"
+                d="M456.849 239.635L458.474 224.178"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_34"
+                d="M467.202 240.998L469.633 225.647"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_35"
+                d="M477.47 242.901L480.701 227.698"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_36"
+                d="M487.624 245.339L491.646 230.326"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_37"
+                d="M497.636 248.304L502.439 233.523"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_38"
+                d="M507.479 251.79L513.049 237.28"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_39"
+                d="M517.127 255.786L523.448 241.588"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_40"
+                d="M526.552 260.282L533.608 246.434"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_41"
+                d="M535.729 265.264L543.5 251.805"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_42"
+                d="M544.633 270.721L553.097 257.686"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_43"
+                d="M553.238 276.635L562.374 264.061"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_44"
+                d="M561.523 282.992L571.304 270.914"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_45"
+                d="M569.463 289.774L579.863 278.224"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_46"
+                d="M577.038 296.962L588.028 285.972"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_47"
+                d="M584.226 304.537L595.776 294.137"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_48"
+                d="M591.008 312.477L603.086 302.696"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_49"
+                d="M597.365 320.762L609.939 311.626"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_50"
+                d="M603.279 329.367L616.314 320.903"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_51"
+                d="M608.736 338.271L622.196 330.5"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_52"
+                d="M613.718 347.448L627.566 340.392"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_53"
+                d="M618.214 356.873L632.412 350.552"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_54"
+                d="M622.21 366.521L636.72 360.951"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_55"
+                d="M625.696 376.364L640.477 371.561"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_56"
+                d="M628.661 386.376L643.674 382.354"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_57"
+                d="M631.099 396.53L646.302 393.299"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_58"
+                d="M633.002 406.798L648.353 404.367"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_59"
+                d="M634.365 417.151L649.822 415.526"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_60"
+                d="M635.185 427.561L650.705 426.748"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                id="Dot_61"
+                d="M635.458 438H651"
+                stroke="white"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </g>
+            <g id="90degLines">
+              <path
+                id="Line 9"
+                d="M248 438L238 432.226V443.774L248 438ZM239 437H219V439H239V437Z"
+                fill="white"></path>
+              <path
+                id="Line 11"
+                d="M436 249L441.774 239L430.226 239L436 249ZM437 240L437 220L435 220L435 240L437 240Z"
+                fill="white"></path>
+              <path
+                id="Line 12"
+                d="M436 625L430.226 635L441.774 635L436 625ZM435 634L435 654L437 654L437 634L435 634Z"
+                fill="white"></path>
+              <path
+                id="Line 10"
+                d="M625 437L635 442.774L635 431.226L625 437ZM634 438L654 438L654 436L634 436L634 438Z"
+                fill="white"></path>
+            </g>
+          </g>
+          <g id="MajorArrow">
+            <g id="Group 1">
+              <path
+                id="Polygon 1"
+                d="M428.26 437.029L436 422.307L443.74 437.029L436 451.751L428.26 437.029Z"
+                stroke="white"
+                stroke-width="4"></path>
+              <line
+                id="Line 15"
+                y1="-2"
+                x2="30.6464"
+                y2="-2"
+                transform="matrix(0.454499 0.890747 -0.476341 0.879261 426 437.029)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 17"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.55 462.615)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 18"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.08 462.231)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 19"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.5 479.258)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 20"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.258 479.349)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 21"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.25 496.467)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 22"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.008 496.557)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 23"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(0.44954 0.89326 -0.481429 0.876485 430.5 513.109)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 24"
+                y1="-2"
+                x2="21.1501"
+                y2="-2"
+                transform="matrix(-0.44954 0.89326 0.481429 0.876485 441.258 513.2)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 16"
+                y1="-2"
+                x2="30.6464"
+                y2="-2"
+                transform="matrix(-0.454499 0.890747 0.476341 0.879261 445.652 437.505)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 25"
+                y1="-2"
+                x2="31.0768"
+                y2="-2"
+                transform="matrix(0.1395 0.990222 -0.890965 0.454071 430.5 530.227)"
+                stroke="white"
+                stroke-width="4"></line>
+              <line
+                id="Line 26"
+                y1="-2"
+                x2="30.613"
+                y2="-2"
+                transform="matrix(-0.1395 0.990222 0.890965 0.454071 441.178 530.227)"
+                stroke="white"
+                stroke-width="4"></line>
+            </g>
+          </g>
+          <g id="MinorArrow">
+            <g id="Group 1_2">
+              <path
+                id="Polygon 1_2"
+                d="M427.887 437.387L436 426.764L444.113 437.387L436 448.01L427.887 437.387Z"
+                stroke="white"
+                stroke-width="3"></path>
+              <line
+                id="Line 15_2"
+                y1="-1.5"
+                x2="23.3922"
+                y2="-1.5"
+                transform="matrix(0.595443 0.803397 -0.618408 0.785857 426 437.387)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 17_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.55 455.002)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 18_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.08 454.737)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 19_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.5 466.459)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 20_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.258 466.522)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 21_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.25 478.306)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 22_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.008 478.369)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 23_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(0.590142 0.807299 -0.623668 0.781689 430.5 489.764)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 24_2"
+                y1="-1.5"
+                x2="16.111"
+                y2="-1.5"
+                transform="matrix(-0.590142 0.807299 0.623668 0.781689 441.258 489.826)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 16_2"
+                y1="-1.5"
+                x2="23.3922"
+                y2="-1.5"
+                transform="matrix(-0.595443 0.803397 0.618408 0.785857 445.652 437.714)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 25_2"
+                y1="-1.5"
+                x2="21.6245"
+                y2="-1.5"
+                transform="matrix(0.200477 0.979698 -0.943605 0.331072 430.5 501.549)"
+                stroke="white"
+                stroke-width="3"></line>
+              <line
+                id="Line 26_2"
+                y1="-1.5"
+                x2="21.3017"
+                y2="-1.5"
+                transform="matrix(-0.200477 0.979698 0.943605 0.331072 441.178 501.549)"
+                stroke="white"
+                stroke-width="3"></line>
+            </g>
+          </g>
         </g>
         <defs>
-        <filter id="filter0_d_59_13" x="203" y="205" width="466" height="464" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        <feOffset/>
-        <feGaussianBlur stdDeviation="7.5"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_59_13"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_59_13" result="shape"/>
-        </filter>
+          <filter
+            id="filter0_d_59_13"
+            x="203"
+            y="205"
+            width="466"
+            height="464"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+          >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix
+              in="SourceAlpha"
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"></feColorMatrix>
+            <feOffset></feOffset>
+            <feGaussianBlur stdDeviation="7.5"></feGaussianBlur>
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"></feColorMatrix>
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_59_13"></feBlend>
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow_59_13"
+              result="shape"></feBlend>
+          </filter>
         </defs>
-        </svg>
-        
-        
-        
-        
-        
-        
+      </svg>
     </div>
     <!-- <video
       id="background-video"
