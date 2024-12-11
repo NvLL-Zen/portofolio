@@ -205,6 +205,41 @@
     padding-left: 0.5%;
   }
 
+  .mainNav::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background-color: white;
+    height: 4px;
+    width: 0;
+    animation: whiteTop 1s linear forwards;
+    animation-timeline: scroll(root);
+  }
+
+  .mainNav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    background-color: white;
+    height: 4px;
+    width: 0;
+    animation: whiteTop 1s linear forwards;
+    animation-timeline: scroll(root);
+  }
+
+
+
+  @keyframes whiteTop {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 50%;
+    }
+  }
+
   @media only screen and (max-width: 720px) {
     .mainNav {
       display: none;

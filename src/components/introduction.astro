@@ -2,201 +2,92 @@
 import Image from "astro/components/Image.astro"
 import OjanHacker from '../images/OjanHacker.jpg'
 ---
-
-<div id="about_section" class="main_intro">
-  <div class="data_title">
-    <h1 class="data">ABOUT ME</h1>
-  </div>
-  <div class="main_container">
-    <div class="half">
-      <p class="p">
-        Hi there! you can call me Ojan or Fauzan. I'm an enthusiastic 11th grade
-        high school student with a deep passion for coding and technology. My
-        journey in the world of programming began with Python, which remains my
-        primary and favorite language due to its simplicity and versatility.
-      </p>
-      <p class="p">
-        When I'm not immersed in code, I enjoy unwinding with video games. They
-        provide a perfect balance of entertainment, challenge and strategic
-        thinking. Combining my love for programming and videogame, I often find
-        myself exploring the intersection of technology and interactive
-        entertainment.
-      </p>
-    </div>
-    <div class="profile half">
-      <div class="half-height scan_results">
-        <h4>SCAN RESULTS</h4>
-        <h2>FAUZAN RIZKY NAUFAL</h2>
-        <h4>AFFILIATION</h4>
-        <h2 class="strip">-</h2>
-      </div>
-      <div class="half-height profile_scan">
-        <Image src={OjanHacker} class="profile_pic" alt="ojan's pic" />
-        <div class="profile_records">
-            <h2>Projects</h2>
-            <a target="_blank" href="https://github.com/nvll-zen/-nethack">~> -nethack</a>
-            <a target="_blank" href="https://scefco.pages.dev">~> scefco.pages.dev</a>
-            <a target="_self" href="https://zenriel.tech">~> zenriel.tech</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="introMain">
+  <h1>
+    A (Junior) Software Engineer
+  </h1>
+  <h2>
+    Hi there, the name's Fauzan Rizky Naufal. But you can just call me Ojan, 
+    i'm a highschool student in Indonesia. And since i was a kid, i am super interested in learning about computers and the internet.
+    From simple scripts to web scrapings, Python is my main language. Aside from the world of programming, i usually unwind myself with playing videogames. 
+    Both videogames and programming have been my favorite things since i was a child, they have a special place in my heart that i will never forget
+  </h2>
 </div>
-
 <style>
-  
   html {
-    font-family: "Rajdhani";
     font-size: 16px;
   }
-
-  a {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.25rem;
-    transition: all 0.5s linear;
-  }
-
-  a:hover {
-    background: white;
-    color: black;
-    transition: all 0.5s linear;
-  }
-  
   * {
-    color: white;
     /* border: 1px solid red; */
+    color: white;
+    font-family: "Rajdhani";
     margin: 0;
     padding: 0;
   }
 
-  h5 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    border: none;
-  }
-
-  p {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #d4d4d4;
-    border: none;
-  }
-
-  p::after {
-    content: "";
-    width: 100%;
-    background-color: white;
-    height: 100%;
-  }
-
-  p, h2 {
-    animation: scrollFG 1s linear;
-    animation-timeline: view();
-  }
-
-  .main_intro {
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .data_title {
-    width: 86.25%;
-  }
-
-  .data {
-    border: 1px solid white;
-    padding: 0.5% 1%;
-    border-bottom: none;
+  h1 {
+    backdrop-filter: blur(5px);
+    font-weight: 900;
+    font-size: 9rem;
     width: fit-content;
   }
 
-  .main_container {
+  h1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    width: 100%;
+    
+    animation: Reveal 1s linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+     animation-timing-function: steps(29);
+    animation-fill-mode: forwards;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    backdrop-filter: blur(5px);
+    width: 80vw;
+  }
+
+  h2::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    width: 100%;
+    
+    animation: Reveal 1s linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+   
+    animation-fill-mode: forwards;
+  }
+
+  .introMain {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    gap: 2%;
+    padding-left: 2vw;
+    gap: 0px;
+    width: 100vw;
+    height: 100vh;
   }
 
-  .half {
-    width: 40%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 1%;
-    border: 1px solid white;
-    background-blend-mode:darken ;
-    backdrop-filter: blur(10px) brightness(20%);
-  }
-
-  .half-height {
-    height: 50%;
-  }
-
-  .profile_records {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .profile_scan {
-    display: flex;
-    flex-direction: row;
-    gap: 5%;
-  }
-
-  .profile {
-    gap: 50px;
-  }
-
-  .strip {
-    font-weight: 900;
-  }
-
-  .profile_pic {
-    height: fit-content;
-    width: 25%;
-  }
-
-  @media only screen and (max-width: 720px) {
-    .data_title {
-      width: 100%;
-    }
-    .main_intro {
-      height: 90vh;
-    }
-    .main_container {
-      flex-direction: column;
-      height: fit-content;
-    }
-
-    .half {
-      width: 100%;
-      height: fit-content;
-    }
-
-    .half-height {
-      height: 25%;
-    }
-  }
-
-  @keyframes scrollFG {
+  @keyframes Reveal {
     0% {
-      background: white;
-      color: white;
+      width: 100%;
     }
 
-    20% {
-      background: white;
-      color: white;
-    }
-
-    35% {
-      background: transparent;
+    100% {
+      width: 0%;
     }
   }
 </style>
