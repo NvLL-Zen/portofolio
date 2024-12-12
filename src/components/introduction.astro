@@ -8,9 +8,12 @@ import OjanHacker from '../images/OjanHacker.jpg'
   </h1>
   <h2>
     Hi there, the name's Fauzan Rizky Naufal. But you can just call me Ojan, 
-    i'm a highschool student in Indonesia. And since i was a kid, i am super interested in learning about computers and the internet.
-    From simple scripts to web scrapings, Python is my main language. Aside from the world of programming, i usually unwind myself with playing videogames. 
-    Both videogames and programming have been my favorite things since i was a child, they have a special place in my heart that i will never forget
+    i'm a highschool student in Indonesia. And since i was a kid, i am super interested in learning about computers and technologies.
+    From simple to complicated stuffs, Python is my go to language. 
+  </h2>
+  <h2>
+    Aside from the world of programming, i usually unwind myself with playing videogames. 
+    Both videogames and programming have been my favorite things since i was a child, they have a special place in my heart that i will never forget.
   </h2>
 </div>
 <style>
@@ -21,6 +24,7 @@ import OjanHacker from '../images/OjanHacker.jpg'
     /* border: 1px solid red; */
     color: white;
     font-family: "Rajdhani";
+    text-align: justify;
     margin: 0;
     padding: 0;
   }
@@ -28,8 +32,9 @@ import OjanHacker from '../images/OjanHacker.jpg'
   h1 {
     backdrop-filter: blur(5px);
     font-weight: 900;
-    font-size: 9rem;
+    font-size: clamp(1rem, 8vw, 9rem);
     width: fit-content;
+    text-shadow: 0px 0px 15px white;
   }
 
   h1::after {
@@ -41,16 +46,16 @@ import OjanHacker from '../images/OjanHacker.jpg'
     background-color: white;
     width: 100%;
     
-    animation: Reveal 1s linear;
+    animation: Reveal 1s ease-out;
     animation-timeline: view();
-    animation-range: entry 0% cover 40%;
+    animation-range: entry 60% cover 200%;
      animation-timing-function: steps(29);
     animation-fill-mode: forwards;
   }
 
   h2 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: clamp(0.5rem, 4.5vw, 2rem);
+    font-weight: 600;
     backdrop-filter: blur(5px);
     width: 80vw;
   }
@@ -64,10 +69,9 @@ import OjanHacker from '../images/OjanHacker.jpg'
     background-color: white;
     width: 100%;
     
-    animation: Reveal 1s linear;
+    animation: Reveal 1s ease-out;
     animation-timeline: view();
-    animation-range: entry 0% cover 30%;
-   
+    animation-range: entry 60% cover 150%;
     animation-fill-mode: forwards;
   }
 
@@ -75,15 +79,30 @@ import OjanHacker from '../images/OjanHacker.jpg'
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 2vw;
-    gap: 0px;
+    align-items: center;
+    gap: 5vh;
     width: 100vw;
-    height: 100vh;
+    height: 95vh;
+  }
+
+  @media only screen and (max-width: 720px) {
+    h1::after, h2::after {
+      animation: none;
+      width: 0%;
+    }
   }
 
   @keyframes Reveal {
     0% {
       width: 100%;
+    }
+
+    2.5% {
+      width: 100%;
+    }
+
+    15% {
+      width: 0%;
     }
 
     100% {
