@@ -10,7 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.16.11",
+    "astro": "5.0.5",
     "powerglitch": "^2.3.4"
   }
 }
